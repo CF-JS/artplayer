@@ -1,0 +1,74 @@
+
+<?php include "block_header.htm"; ?>
+
+<body>
+    <div class="x-nav">
+        <span class="layui-breadcrumb">
+            <a><cite>首页</cite></a>
+            <a><cite>网站设置</cite></a>
+            <a><cite>网站管理</cite></a>
+        </span>
+  <button style="margin-left:1em;line-height:1.6em;margin-top:3px;float:right"  class="layui-btn layui-btn-sm"  title="刷新" onclick="location.replace(location.href)"><i class="layui-icon  layui-icon-refresh"></i></button>
+
+    </div>
+    <div class="x-body">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">基本设置</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <form class="layui-form layui-form-pane" name="configform" id="configform">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">
+                                后台账号
+                            </label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="config[user]" autocomplete="off" value="<?php echo trim($config["user"]) ?>" class="layui-input" title="" />
+                            </div>
+                            <div class="layui-form-mid layui-word-aux"><span class="x-red">*</span> 可修改后台登录账号。
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">
+                                后台密码
+                            </label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="config[pass]" autocomplete="off" value="<?php echo trim($config["pass"]) ?>" class="layui-input" title="" />
+                            </div>
+                            <div class="layui-form-mid layui-word-aux"><span class="x-red">*</span> 可修改后台登录密码。
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">
+                                弹幕库目录
+                            </label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="config[dmmulu]" autocomplete="off" value="<?php echo trim($config["dmmulu"]) ?>" class="layui-input" title="" />
+                            </div>
+                            <div class="layui-form-mid layui-word-aux"><span class="x-red">*</span> 放在二级目录的时候填写例如/art，否则无法弹幕库。
+                            </div>
+                        </div>
+                        <!--结束-->
+                        <div class="layui-form-item">
+                            <input name="edit" type="hidden" value="1" />
+							<button class="layui-btn" type="button" onclick="text()">保 存</button>
+
+                        </div>
+                    </form>
+                </div>
+<script>
+function text() {
+  layer.msg('正在提交',{time:5000000});
+      $.ajax({
+      type : 'POST',
+  data:$('#configform').serialize(),
+      url :'post.php?act=setting',  
+      success : function (data) {
+  layer.msg('保存完成',{time:1000});
+      }
+  });
+  }
+</script>
+</body>
+</html>

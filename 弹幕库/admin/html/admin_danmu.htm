@@ -1,0 +1,92 @@
+<?php include "block_header.htm";?>
+<body>
+        <div class="x-nav">
+        <span class="layui-breadcrumb">
+            <a><cite>首页</cite></a>
+            <a><cite>弹幕设置</cite></a>
+            <a><cite>弹幕管理</cite></a>
+        </span>
+  <button style="margin-left:1em;line-height:1.6em;margin-top:3px;float:right"  class="layui-btn layui-btn-sm"  title="刷新" onclick="location.replace(location.href)"><i class="layui-icon  layui-icon-refresh"></i></button>
+
+    </div>
+
+					<div class="layui-tab" overflow>
+						<ul class="layui-tab-title">
+							<li class="layui-this">弹幕列表</li>
+						</ul>
+						<div class="layui-tab-content">
+							<div class="layui-tab-item layui-show" name="弹幕列表">
+								<div class="chu" style="margin-top:30px">
+									<div class="demoTable layui-form-item">
+										<div class="layui-inline">
+											<label class="layui-form-label">搜索</label>
+											<div class="layui-input-inline">
+												<input class="layui-input" id="textdemo" placeholder="请输入弹幕id或弹幕关键字">
+											</div>
+											<button class="layui-btn" lay-submit="search_submits" type="button" lay-filter="reloadlst_submit">搜索</button>
+											<button class="layui-btn" lay-submit="search_submits" title="刷新" onclick="location.replace(location.href)" lay-filter="reloadlst_submit">刷新</button>
+										</div>
+										
+									</div>
+								</div>
+								<table class="layui-hide" id="dmlist" lay-filter="dmlist">
+								</table>
+							</div>
+
+						</div>
+					</div>
+	<script type="text/html" id="listbar">
+		<a class="layui-btn layui-btn-xs" lay-event="dmedit">编辑</a>
+		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+	</script>
+	<script type="text/html" id="reportbar">
+		<a class="layui-btn layui-btn-xs" lay-event="edit">误报</a>
+		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+	</script>
+
+	<script type="text/template" id="bondTemplateList">
+		<div class="layui-card-body" style="padding: 15px;">
+        <form class="layui-form" lay-filter="component-form-group" id="submits" onsubmit="return false">
+            <div class="layui-row layui-col-space10 layui-form-item">
+                <input type="hidden" name="cid" value="{{ d[4] }}">
+                <div class="layui-col-lg5">
+                    <label class="layui-form-label">弹幕ID：</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="id" placeholder="请输入名称" autocomplete="off"
+                               lay-verify="required" class="layui-input"
+                               value="{{ d[0]?d[0]:'' }}" {{# if(d[0]){ }}disabled{{# } }}>
+                    </div>
+                </div>
+                <div class="layui-col-lg5">
+                    <label class="layui-form-label">颜色：</label>
+  						<div class="layui-input-block">
+							<div class="layui-input-inline" style="width: 120px;">
+								<input type="text" name="color" placeholder="请选择颜色" class="layui-input" id="test-form-input" value="{{ d[3]?d[3]:'' }}">
+							</div>
+						<div class="layui-inline" style="left: -11px;">
+						<div id="test-form"></div>
+					</div>
+				</div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">弹幕内容</label>
+                    <div class="layui-input-block">
+                    <textarea name="text" placeholder="请输入内容" class="layui-textarea"
+                              lay-verify="required">
+                        {{ d[5] ? d[5]:'' }}
+                    </textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="bond_sumbit">立即提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</script>
+
+</body>
+
+</html>
